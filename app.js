@@ -23,11 +23,13 @@ app.get('/api/movies/:id', movieHandlers.getMovieById);
 app.get('/api/users', users.getUsers);
 app.get('/api/users/:id', users.getUserById);
 
-app.post('/api/movies', movieHandlers.postMovie);
-app.post('/api/users', users.postUser);
+const { validateMovie, validateUser } = require('./validators');
 
-app.put('/api/movies/:id', movieHandlers.updateMovie);
-app.put('/api/users/:id', users.updateUser);
+app.post('/api/movies', validateMovie, movieHandlers.postMovie);
+app.put('/api/movies/:id', validateMovie, movieHandlers.updateMovie);
+
+app.post('/api/users', validateUser, users.postUser);
+app.put('/api/users/:id', validateUser, users.updateUser);
 
 app.listen(port, (err) => {
   if (err) {
