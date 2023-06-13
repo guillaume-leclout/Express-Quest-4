@@ -44,7 +44,7 @@ app.post('/api/users', auth.hashPassword, users.postUser);
 app.put('/api/users/:id', auth.hashPassword, users.updateUser);
 app.delete('/api/users/:id', users.deleteUser);
 
-app.post('/api/movies', verifyToken, movieHandlers.postMovie);
+app.post('/api/movies', movieHandlers.postMovie);
 
 app.listen(port, (err) => {
   if (err) {
